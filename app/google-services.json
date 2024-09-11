@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "600484633228",
+    "project_id": "desafio2dsm-50c01",
+    "storage_bucket": "desafio2dsm-50c01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600484633228:android:47740c27234124a6b239a9",
+        "android_client_info": {
+          "package_name": "edu.udb.desafio2dsm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcYVw6ttLYe3JeEsU20Zu_SHwvBhVUEkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

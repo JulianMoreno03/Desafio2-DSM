@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Desafio2DSM</string>
+    <string name="TxtLogin">BIENVENIDO</string>
+    <string name="ingresarDatos">Ingresa tus Datos</string>
+    <string name="inputCorreo">Ingresar tu Correo</string>
+    <string name="inputContra">Ingresar tu Contraseña</string>
+    <string name="btnLogin">INGRESAR</string>
+    <string name="btnRegistro">CREAR CUENTA</string>
+    <string name="txtLogin02">---- O ----</string>
+</resources>
