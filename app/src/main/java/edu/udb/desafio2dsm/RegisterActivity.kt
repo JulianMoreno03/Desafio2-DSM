@@ -1,5 +1,6 @@
 package edu.udb.desafio2dsm
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -41,8 +42,8 @@ class RegisterActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // El registro fue exitoso
                             Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
-                            //PENDIENTE
-                            // startActivity(Intent(this, AnotherActivity::class.java))
+                            goToMenuActivity();
+
                         } else {
                             // El registro falló
                             Toast.makeText(this, "Registro fallido: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -52,5 +53,14 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
+
+
+    // Función para ir a la MenuActivity
+    private fun goToMenuActivity() {
+        val intent = Intent(this, MenuActivity::class.java)
+        startActivity(intent)
+    }
+
 }
