@@ -1,7 +1,10 @@
 package edu.udb.desafio2dsm
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,20 +17,18 @@ class ComidaActivity : AppCompatActivity() {
     private lateinit var rvComidas: RecyclerView
     private lateinit var database: DatabaseReference
     private lateinit var comidaList: MutableList<Comidas>
+    private var cartItems: MutableList<Comidas> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comida)
 
-        // Inicializa el RecyclerView y configura su LayoutManager
         rvComidas = findViewById(R.id.rvComidas)
         rvComidas.layoutManager = LinearLayoutManager(this)
 
-        // Inicializa la lista y la referencia de Firebase
         comidaList = mutableListOf()
         database = FirebaseDatabase.getInstance().getReference("comidas")
 
-        // Escucha cambios en la base de datos
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 comidaList.clear()
@@ -45,12 +46,29 @@ class ComidaActivity : AppCompatActivity() {
 
                 Log.d("ComidaActivity", "Total de comidas: ${comidaList.size}")
 
-                // Configura el adaptador con la lista actualizada
-                rvComidas.adapter = ComidaAdapter(comidaList)
+                rvComidas.adapter = ComidaAdapter(comidaList) { comida ->
+                    addToCart(comida)
+                }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.w("ComidaActivity", "Error al leer los datos.", error.toException())
             }
         })
+
+        findViewById<Button>(R.id.carrito).setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            intent.putParcelableArrayListExtra("cart_items", ArrayList(cartItems))
+            startActivity(intent)
+        }
     }
+
+    private fun addToCart(item: Comidas) {
+        if (!cartItems.contains(item)) {
+            cartItems.add(item)
+        }
+        Log.d("ComidaActivity", "Item añadido al carrito: ${item.nombre}")
+    }
+
+
 }

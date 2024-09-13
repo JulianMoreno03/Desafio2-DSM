@@ -7,7 +7,7 @@
       </SelectionState>
       <SelectionState runConfigName="Desafio2DSM">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-09-13T02:41:28.362616800Z">
+        <DropdownSelection timestamp="2024-09-13T22:36:56.931487100Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=R58NA0Q8GFZ" />

@@ -15,4 +15,8 @@
 
     <string name="comidas">COMIDAS</string>
     <string name="bebidas">BEBIDAS</string>
+
+    <string name="txtCarrito">Hacer Pedido</string>
+
+    <string name="txtCarrito01">BORRAR</string>
 </resources>
