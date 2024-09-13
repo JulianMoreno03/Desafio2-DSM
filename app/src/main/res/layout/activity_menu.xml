@@ -9,6 +9,7 @@
 
     >
 
+
     <View
         android:id="@+id/view5"
         android:layout_width="wrap_content"
@@ -16,10 +17,42 @@
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnComidas"
+        android:layout_width="293dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/btnmain"
+        android:gravity="end|center_vertical"
+        android:text="@string/comidas"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/btnBebidas"
+        android:layout_width="293dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="112dp"
+        android:background="@drawable/btnmain"
+        android:gravity="end|center_vertical"
+        android:text="@string/bebidas"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnComidas"
+        app:layout_constraintVertical_bias="0.188" />
 
     <View
         android:id="@+id/view2"
@@ -56,5 +89,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/prueba" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="118dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBebidas"
+        app:layout_constraintEnd_toEndOf="@+id/btnBebidas"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="@+id/btnBebidas"
+        app:layout_constraintTop_toTopOf="@+id/btnBebidas"
+        app:layout_constraintVertical_bias="0.476"
+        app:srcCompat="@drawable/bebiba" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="134dp"
+        android:layout_height="122dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnComidas"
+        app:layout_constraintEnd_toEndOf="@+id/btnBebidas"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/btnComidas"
+        app:layout_constraintTop_toTopOf="@+id/btnComidas"
+        app:layout_constraintVertical_bias="0.681"
+        app:srcCompat="@drawable/taco" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtMenu01"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/cardview_dark_background"
+        app:layout_constraintBottom_toTopOf="@+id/btnComidas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.522" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtLogin02"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="424dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

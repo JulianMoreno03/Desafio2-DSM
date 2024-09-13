@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Desafio2DSM"
         tools:targetApi="31">
         <activity
+            android:name=".BebidaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ComidaActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
