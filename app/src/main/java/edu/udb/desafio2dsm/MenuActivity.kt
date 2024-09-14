@@ -17,6 +17,7 @@ class MenuActivity : AppCompatActivity() {
         val btnComida = findViewById<Button>(R.id.btnComidas)
         val btnBebida = findViewById<Button>(R.id.btnBebidas);
 
+        val btnOrdenes = findViewById<Button>(R.id.btnOrdenes);
         // Configura el click listener para navegar a otra actividad
         btnComida.setOnClickListener {
             goToComida()
@@ -24,6 +25,10 @@ class MenuActivity : AppCompatActivity() {
 
         btnBebida.setOnClickListener {
             goToBebida()
+        }
+
+        btnOrdenes.setOnClickListener {
+            goToOrdenes()
         }
     }
 
@@ -38,5 +43,13 @@ class MenuActivity : AppCompatActivity() {
         val intent = Intent(this, BebidaActivity::class.java)
         startActivity(intent)
     }
+
+    // Función para ir a las ordenes
+    private fun goToOrdenes() {
+        val intent = Intent(this, OrdenesActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
 }
