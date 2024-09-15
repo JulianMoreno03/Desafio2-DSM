@@ -84,6 +84,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="@string/inputCorreo"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +101,7 @@
         android:hint="@string/inputContra"
         android:background="@drawable/rounded"
         android:ems="10"
+        android:textColor="@color/black"
         android:inputType="textVisiblePassword"
 
         app:layout_constraintEnd_toEndOf="parent"

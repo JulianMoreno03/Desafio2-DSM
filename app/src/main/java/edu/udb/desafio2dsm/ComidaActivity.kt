@@ -3,12 +3,13 @@ package edu.udb.desafio2dsm
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import edu.udb.desafio2dsm.adapters.ComidaAdapter
 import edu.udb.desafio2dsm.models.Comidas
 
@@ -17,6 +18,7 @@ class ComidaActivity : AppCompatActivity() {
     private lateinit var rvComidas: RecyclerView
     private lateinit var database: DatabaseReference
     private lateinit var comidaList: MutableList<Comidas>
+    private lateinit var storage: FirebaseStorage
     private var cartItems: MutableList<Comidas> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,7 @@ class ComidaActivity : AppCompatActivity() {
         rvComidas = findViewById(R.id.rvComidas)
         rvComidas.layoutManager = LinearLayoutManager(this)
 
+        storage = FirebaseStorage.getInstance()
         comidaList = mutableListOf()
         database = FirebaseDatabase.getInstance().getReference("comidas")
 
@@ -36,8 +39,7 @@ class ComidaActivity : AppCompatActivity() {
                     val id = comidaSnapshot.child("id").getValue(Int::class.java)
                     val nombre = comidaSnapshot.child("nombre").getValue(String::class.java)
                     val precio = comidaSnapshot.child("precio").getValue(Double::class.java)
-
-                    if (id != null && nombre != null && precio != null) {
+                    if (id != null && nombre != null && precio != null ) {
                         val comida = Comidas(id, nombre, precio)
                         comidaList.add(comida)
                         Log.d("ComidaActivity", "Comida añadida: $nombre")
@@ -66,6 +68,8 @@ class ComidaActivity : AppCompatActivity() {
     private fun addToCart(item: Comidas) {
         if (!cartItems.contains(item)) {
             cartItems.add(item)
+
+            Toast.makeText(this, "${item.nombre} fue agregado al carrito correctamente", Toast.LENGTH_LONG).show()
         }
         Log.d("ComidaActivity", "Item añadido al carrito: ${item.nombre}")
     }

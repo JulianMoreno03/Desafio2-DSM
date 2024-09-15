@@ -1,7 +1,9 @@
 package edu.udb.desafio2dsm
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -77,12 +79,23 @@ class CartActivity : AppCompatActivity() {
 
         database.child("ordenes").child(orderId).setValue(order)
             .addOnSuccessListener {
-                // Limpiar el carrito y redirigir al usuario si es necesario
+
+                Toast.makeText(this, ("Pedido Realizado con exito"), Toast.LENGTH_LONG).show()
+                goToMenuActivity();
                 comidasList.clear()
                 cartAdapter.notifyDataSetChanged()
             }
             .addOnFailureListener {
                 // Manejar el error
             }
+
+
     }
+
+    // Función para ir a la MenuActivity
+   private fun goToMenuActivity() {
+        val intent = Intent(this, MenuActivity::class.java)
+        startActivity(intent)
+    }
+
 }

@@ -2,6 +2,7 @@ package edu.udb.desafio2dsm
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import edu.udb.desafio2dsm.adapters.OrdenAdapter
 import edu.udb.desafio2dsm.models.Comidas
 import edu.udb.desafio2dsm.models.Orden
@@ -19,9 +21,9 @@ class OrdenesActivity : AppCompatActivity() {
 
     private lateinit var rvOrdenes: RecyclerView
     private lateinit var ordenAdapter: OrdenAdapter
+    private var ordenesList: MutableList<Orden> = mutableListOf()
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
-    private var ordenesList: MutableList<Orden> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +32,10 @@ class OrdenesActivity : AppCompatActivity() {
         rvOrdenes = findViewById(R.id.rvOrdenes)
         rvOrdenes.layoutManager = LinearLayoutManager(this)
 
+        // Inicializar Firebase Auth y Database
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
-
+        // Cargar las órdenes del usuario
         loadOrders()
     }
 
@@ -51,43 +54,32 @@ class OrdenesActivity : AppCompatActivity() {
                     ordenesList.clear()
                     if (snapshot.exists()) {
                         for (ordenSnapshot in snapshot.children) {
-                            try {
-                                val itemsSnapshot = ordenSnapshot.child("items")
-                                val itemsList = mutableListOf<Comidas>()
+                            val itemsSnapshot = ordenSnapshot.child("items")
+                            val itemsList = mutableListOf<Comidas>()
 
-                                // Iterar sobre los items dentro de la orden
-                                for (itemSnapshot in itemsSnapshot.children) {
-                                    // Deserialización flexible
-                                    val id = itemSnapshot.child("id").getValue(Int::class.java) ?: 0
-                                    val nombre = itemSnapshot.child("nombre").getValue(String::class.java) ?: ""
-                                    val precio = itemSnapshot.child("precio").getValue(Double::class.java) ?: 0.0
-                                    val cantidad = itemSnapshot.child("cantidad").getValue(Int::class.java) ?: 1
+                            for (itemSnapshot in itemsSnapshot.children) {
+                                val id = itemSnapshot.child("id").getValue(Int::class.java) ?: 0
+                                val nombre = itemSnapshot.child("nombre").getValue(String::class.java) ?: ""
+                                val precio = itemSnapshot.child("precio").getValue(Double::class.java) ?: 0.0
+                                val cantidad = itemSnapshot.child("cantidad").getValue(Int::class.java) ?: 1
 
-                                    val comida = Comidas(id, nombre, precio, cantidad)
-                                    itemsList.add(comida)
-                                }
-
-                                val orden = Orden(
-                                    userId = ordenSnapshot.child("userId").getValue(String::class.java) ?: "",
-                                    items = itemsList
-                                )
-
-                                ordenesList.add(orden)
-                            } catch (e: Exception) {
-                                Log.e("OrdenesActivity", "Error al procesar la orden: ${e.message}")
+                                val comida = Comidas(id, nombre, precio, cantidad)
+                                itemsList.add(comida)
                             }
+
+                            val orden = Orden(
+                                userId = ordenSnapshot.child("userId").getValue(String::class.java) ?: "",
+                                items = itemsList
+                            )
+
+                            ordenesList.add(orden)
                         }
 
-                        // Verifica si el adaptador está inicializado
-                        if (!::ordenAdapter.isInitialized) {
-                            ordenAdapter = OrdenAdapter(ordenesList)
-                            rvOrdenes.adapter = ordenAdapter
-                        } else {
-                            // Solo notifica el cambio de datos si el adaptador ya está inicializado
-                            ordenAdapter.notifyDataSetChanged()
-                        }
+                        // Inicializar el adaptador con la lista de órdenes
+                        ordenAdapter = OrdenAdapter(ordenesList)
+                        rvOrdenes.adapter = ordenAdapter
                     } else {
-                        Log.d("OrdenesActivity", "No se encontraron órdenes para este usuario")
+                        Toast.makeText(this@OrdenesActivity, "No se encontraron órdenes", Toast.LENGTH_SHORT).show()
                     }
                 }
 

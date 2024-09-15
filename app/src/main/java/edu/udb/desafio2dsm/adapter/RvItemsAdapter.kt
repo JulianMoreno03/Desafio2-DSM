@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import edu.udb.desafio2dsm.R
 import edu.udb.desafio2dsm.models.Comidas
 
@@ -34,9 +36,12 @@ class ComidaAdapter(
         private val txtPrecio: TextView = itemView.findViewById(R.id.txtPrecio)
         private val btnAddToCart: Button = itemView.findViewById(R.id.btnAddToCart)
 
+
         fun bind(comida: Comidas) {
             txtNombre.text = comida.nombre
             txtPrecio.text = "$ ${comida.precio}"
+
+
 
             btnAddToCart.setOnClickListener {
                 onAddToCart?.invoke(comida)

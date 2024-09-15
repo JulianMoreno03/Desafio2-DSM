@@ -20,4 +20,7 @@
     <string name="txtCarrito">Hacer Pedido</string>
 
     <string name="txtCarrito01">BORRAR</string>
+
+
+    <string name="ordenes01">HISTORIAL DE ORDENES</string>
 </resources>
