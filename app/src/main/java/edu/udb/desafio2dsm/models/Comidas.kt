@@ -7,13 +7,13 @@ data class Comidas(
     val id: Int = 0,
     val nombre: String = "",
     val precio: Double = 0.0,
-    var cantidad: Int = 1,
+    var cantidad: Int = 1
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString() ?: "",
         parcel.readDouble(),
-
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
